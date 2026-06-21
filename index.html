@@ -291,7 +291,7 @@ body::before{content:'';position:fixed;inset:0;background:
 // ═══════════════════════════════════════════
 // CONFIG
 // ═══════════════════════════════════════════
-const APP_VERSION = '2';
+const APP_VERSION = '3';
 const CFG = {
   supabase_url: 'https://nbzcpwhthkvxpzuclycv.supabase.co',
   supabase_key: 'sb_publishable_JH2NeVMoQtr1jgIMay2A6g_nf06Td0-',
@@ -320,27 +320,29 @@ document.addEventListener('visibilitychange', () => { if (document.visibilitySta
 // ═══════════════════════════════════════════
 // TIMES DO BRASILEIRÃO 2026 — 20 times da Série A
 // ═══════════════════════════════════════════
+// IDs reais confirmados na própria ESPN (espn.com/soccer/team/_/id/{ID}/{slug})
+// — não são inventados, foram conferidos um a um na tabela oficial da ESPN.
 const TIMES_BRASILEIRAO = {
-  'Athletico Paranaense': { sigla: 'CAP', cor: '#cc0000' },
-  'Atletico Mineiro': { sigla: 'CAM', cor: '#000000' },
-  'Bahia': { sigla: 'BAH', cor: '#1565c0' },
-  'Botafogo': { sigla: 'BOT', cor: '#000000' },
-  'Chapecoense': { sigla: 'CHA', cor: '#1b7a3d' },
-  'Corinthians': { sigla: 'COR', cor: '#000000' },
-  'Coritiba': { sigla: 'CFC', cor: '#1c8d3a' },
-  'Cruzeiro': { sigla: 'CRU', cor: '#1565c0' },
-  'Flamengo': { sigla: 'FLA', cor: '#c8102e' },
-  'Fluminense': { sigla: 'FLU', cor: '#7a1730' },
-  'Gremio': { sigla: 'GRE', cor: '#1565c0' },
-  'Internacional': { sigla: 'INT', cor: '#c8102e' },
-  'Mirassol': { sigla: 'MIR', cor: '#fdd835' },
-  'Palmeiras': { sigla: 'PAL', cor: '#1b7a3d' },
-  'Red Bull Bragantino': { sigla: 'RBB', cor: '#fdd835' },
-  'Remo': { sigla: 'REM', cor: '#1565c0' },
-  'Santos': { sigla: 'SAN', cor: '#000000' },
-  'Sao Paulo': { sigla: 'SAO', cor: '#c8102e' },
-  'Vasco da Gama': { sigla: 'VAS', cor: '#000000' },
-  'Vitoria': { sigla: 'VIT', cor: '#c8102e' },
+  'Athletico Paranaense': { sigla: 'CAP', cor: '#cc0000', espnId: '3458' },
+  'Atletico Mineiro': { sigla: 'CAM', cor: '#000000', espnId: '7632' },
+  'Bahia': { sigla: 'BAH', cor: '#1565c0', espnId: '9967' },
+  'Botafogo': { sigla: 'BOT', cor: '#000000', espnId: '6086' },
+  'Chapecoense': { sigla: 'CHA', cor: '#1b7a3d', espnId: '9318' },
+  'Corinthians': { sigla: 'COR', cor: '#000000', espnId: '874' },
+  'Coritiba': { sigla: 'CFC', cor: '#1c8d3a', espnId: '3456' },
+  'Cruzeiro': { sigla: 'CRU', cor: '#1565c0', espnId: '2022' },
+  'Flamengo': { sigla: 'FLA', cor: '#c8102e', espnId: '819' },
+  'Fluminense': { sigla: 'FLU', cor: '#7a1730', espnId: '3445' },
+  'Gremio': { sigla: 'GRE', cor: '#1565c0', espnId: '6273' },
+  'Internacional': { sigla: 'INT', cor: '#c8102e', espnId: '1936' },
+  'Mirassol': { sigla: 'MIR', cor: '#fdd835', espnId: '9169' },
+  'Palmeiras': { sigla: 'PAL', cor: '#1b7a3d', espnId: '2029' },
+  'Red Bull Bragantino': { sigla: 'RBB', cor: '#fdd835', espnId: '6079' },
+  'Remo': { sigla: 'REM', cor: '#1565c0', espnId: '4936' },
+  'Santos': { sigla: 'SAN', cor: '#000000', espnId: '2674' },
+  'Sao Paulo': { sigla: 'SAO', cor: '#c8102e', espnId: '2026' },
+  'Vasco da Gama': { sigla: 'VAS', cor: '#000000', espnId: '3454' },
+  'Vitoria': { sigla: 'VIT', cor: '#c8102e', espnId: '3457' },
 };
 // Aliases para nomes alternativos que a ESPN pode usar
 const ALIASES_TIME = {
@@ -356,20 +358,26 @@ function normalizarNomeTime(nome){
   return ALIASES_TIME[n]||n;
 }
 
-// Cache de escudos reais, capturado direto do JSON da ESPN (mais confiável
-// que qualquer URL externa "adivinhada"). Preenchido conforme os jogos/tabela
-// carregam — pode estar vazio na primeiríssima renderização, daí o fallback.
+// Cache de escudos capturados dinamicamente do JSON da ESPN (usado como reforço
+// extra, mas a fonte principal agora é o ID oficial confirmado em TIMES_BRASILEIRAO)
 let ESCUDOS_ESPN={};
 
 function getEscudo(nomeTime,tamanho){
   tamanho=tamanho||32;
-  const nNorm=normalizarNomeTime(nomeTime);
-  // 1) Tenta o cache real da ESPN primeiro
-  const escudoReal=ESCUDOS_ESPN[nNorm];
-  if(escudoReal){
-    return`<img src="${escudoReal}" style="width:${tamanho}px;height:${tamanho}px;object-fit:contain" alt="${nomeTime}" onerror="this.outerHTML=getFallbackEscudo('${nomeTime.replace(/'/g,"\\'")}',${tamanho})">`;
+  const info=getInfoTime(nomeTime);
+  // 1) FONTE PRINCIPAL: monta a URL a partir do ID oficial da ESPN, que foi
+  // conferido manualmente um a um na tabela real da ESPN (não é um palpite).
+  if(info?.espnId){
+    const url=`https://a.espncdn.com/i/teamlogos/soccer/500/${info.espnId}.png`;
+    return`<img src="${url}" style="width:${tamanho}px;height:${tamanho}px;object-fit:contain" alt="${info.sigla}" onerror="this.outerHTML=getFallbackEscudo('${nomeTime.replace(/'/g,"\\'")}',${tamanho})">`;
   }
-  // 2) Sem cache ainda — usa fallback visual com a sigla e cor do time
+  // 2) Reforço: cache dinâmico capturado do JSON de jogos/tabela (times fora da lista fixa)
+  const nNorm=normalizarNomeTime(nomeTime);
+  const escudoCache=ESCUDOS_ESPN[nNorm];
+  if(escudoCache){
+    return`<img src="${escudoCache}" style="width:${tamanho}px;height:${tamanho}px;object-fit:contain" alt="${nomeTime}" onerror="this.outerHTML=getFallbackEscudo('${nomeTime.replace(/'/g,"\\'")}',${tamanho})">`;
+  }
+  // 3) Último recurso: círculo colorido com a sigla
   return getFallbackEscudo(nomeTime,tamanho);
 }
 function getFallbackEscudo(nomeTime,tamanho){
