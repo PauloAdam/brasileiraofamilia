@@ -291,7 +291,7 @@ body::before{content:'';position:fixed;inset:0;background:
 // ═══════════════════════════════════════════
 // CONFIG
 // ═══════════════════════════════════════════
-const APP_VERSION = '1';
+const APP_VERSION = '2';
 const CFG = {
   supabase_url: 'https://nbzcpwhthkvxpzuclycv.supabase.co',
   supabase_key: 'sb_publishable_JH2NeVMoQtr1jgIMay2A6g_nf06Td0-',
@@ -321,26 +321,26 @@ document.addEventListener('visibilitychange', () => { if (document.visibilitySta
 // TIMES DO BRASILEIRÃO 2026 — 20 times da Série A
 // ═══════════════════════════════════════════
 const TIMES_BRASILEIRAO = {
-  'Athletico Paranaense': { sigla: 'CAP', cor: '#cc0000', escudo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/Atletico-paranaense.svg/120px-Atletico-paranaense.svg.png' },
-  'Atletico Mineiro': { sigla: 'CAM', cor: '#000000', escudo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/41/Atletico_mineiro_galo.png/120px-Atletico_mineiro_galo.png' },
-  'Bahia': { sigla: 'BAH', cor: '#1565c0', escudo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9c/ECBahia.png/120px-ECBahia.png' },
-  'Botafogo': { sigla: 'BOT', cor: '#000000', escudo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/02/Botafogo_de_Futebol_e_Regatas_logo.svg/120px-Botafogo_de_Futebol_e_Regatas_logo.svg.png' },
-  'Chapecoense': { sigla: 'CHA', cor: '#1b7a3d', escudo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/26/Associa%C3%A7%C3%A3o_Chapecoense_de_Futebol_logo.svg/120px-Associa%C3%A7%C3%A3o_Chapecoense_de_Futebol_logo.svg.png' },
-  'Corinthians': { sigla: 'COR', cor: '#000000', escudo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b4/Corinthians_simbolo.png/120px-Corinthians_simbolo.png' },
-  'Coritiba': { sigla: 'CFC', cor: '#1c8d3a', escudo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Coritiba_Foot_Ball_Club_logo.svg/120px-Coritiba_Foot_Ball_Club_logo.svg.png' },
-  'Cruzeiro': { sigla: 'CRU', cor: '#1565c0', escudo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/5b/Cruzeiro_Esporte_Clube_%28logo%29.svg/120px-Cruzeiro_Esporte_Clube_%28logo%29.svg.png' },
-  'Flamengo': { sigla: 'FLA', cor: '#c8102e', escudo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/93/Flamengo-RJ_%28BRA%29.png/120px-Flamengo-RJ_%28BRA%29.png' },
-  'Fluminense': { sigla: 'FLU', cor: '#7a1730', escudo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ad/Fluminense_FC_escudo.png/120px-Fluminense_FC_escudo.png' },
-  'Gremio': { sigla: 'GRE', cor: '#1565c0', escudo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/f/f2/Gr%C3%AAmio_Foot-Ball_Porto_Alegrense_logo.svg/120px-Gr%C3%AAmio_Foot-Ball_Porto_Alegrense_logo.svg.png' },
-  'Internacional': { sigla: 'INT', cor: '#c8102e', escudo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e8/SC_Internacional_Brasao.svg/120px-SC_Internacional_Brasao.svg.png' },
-  'Mirassol': { sigla: 'MIR', cor: '#fdd835', escudo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Mirassol_Futebol_Clube_logo.png/120px-Mirassol_Futebol_Clube_logo.png' },
-  'Palmeiras': { sigla: 'PAL', cor: '#1b7a3d', escudo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/Palmeiras_logo.svg/120px-Palmeiras_logo.svg.png' },
-  'Red Bull Bragantino': { sigla: 'RBB', cor: '#fdd835', escudo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/Red_Bull_Bragantino_logo.svg/120px-Red_Bull_Bragantino_logo.svg.png' },
-  'Remo': { sigla: 'REM', cor: '#1565c0', escudo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2b/Clube_do_Remo_logo.png/120px-Clube_do_Remo_logo.png' },
-  'Santos': { sigla: 'SAN', cor: '#000000', escudo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/42/Santos_logo.png/120px-Santos_logo.png' },
-  'Sao Paulo': { sigla: 'SAO', cor: '#c8102e', escudo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b4/Brasao_do_Sao_Paulo_Futebol_Clube.svg/120px-Brasao_do_Sao_Paulo_Futebol_Clube.svg.png' },
-  'Vasco da Gama': { sigla: 'VAS', cor: '#000000', escudo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/CRVascoDaGama.png/120px-CRVascoDaGama.png' },
-  'Vitoria': { sigla: 'VIT', cor: '#c8102e', escudo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/4d/Esporte_Clube_Vit%C3%B3ria_logo.svg/120px-Esporte_Clube_Vit%C3%B3ria_logo.svg.png' },
+  'Athletico Paranaense': { sigla: 'CAP', cor: '#cc0000' },
+  'Atletico Mineiro': { sigla: 'CAM', cor: '#000000' },
+  'Bahia': { sigla: 'BAH', cor: '#1565c0' },
+  'Botafogo': { sigla: 'BOT', cor: '#000000' },
+  'Chapecoense': { sigla: 'CHA', cor: '#1b7a3d' },
+  'Corinthians': { sigla: 'COR', cor: '#000000' },
+  'Coritiba': { sigla: 'CFC', cor: '#1c8d3a' },
+  'Cruzeiro': { sigla: 'CRU', cor: '#1565c0' },
+  'Flamengo': { sigla: 'FLA', cor: '#c8102e' },
+  'Fluminense': { sigla: 'FLU', cor: '#7a1730' },
+  'Gremio': { sigla: 'GRE', cor: '#1565c0' },
+  'Internacional': { sigla: 'INT', cor: '#c8102e' },
+  'Mirassol': { sigla: 'MIR', cor: '#fdd835' },
+  'Palmeiras': { sigla: 'PAL', cor: '#1b7a3d' },
+  'Red Bull Bragantino': { sigla: 'RBB', cor: '#fdd835' },
+  'Remo': { sigla: 'REM', cor: '#1565c0' },
+  'Santos': { sigla: 'SAN', cor: '#000000' },
+  'Sao Paulo': { sigla: 'SAO', cor: '#c8102e' },
+  'Vasco da Gama': { sigla: 'VAS', cor: '#000000' },
+  'Vitoria': { sigla: 'VIT', cor: '#c8102e' },
 };
 // Aliases para nomes alternativos que a ESPN pode usar
 const ALIASES_TIME = {
@@ -355,13 +355,27 @@ function normalizarNomeTime(nome){
   let n=nome.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');
   return ALIASES_TIME[n]||n;
 }
+
+// Cache de escudos reais, capturado direto do JSON da ESPN (mais confiável
+// que qualquer URL externa "adivinhada"). Preenchido conforme os jogos/tabela
+// carregam — pode estar vazio na primeiríssima renderização, daí o fallback.
+let ESCUDOS_ESPN={};
+
 function getEscudo(nomeTime,tamanho){
   tamanho=tamanho||32;
   const nNorm=normalizarNomeTime(nomeTime);
-  for(const[nome,info]of Object.entries(TIMES_BRASILEIRAO)){
-    if(nNorm.includes(normalizarNomeTime(nome))||normalizarNomeTime(nome).includes(nNorm)){
-      return`<img src="${info.escudo}" style="width:${tamanho}px;height:${tamanho}px;object-fit:contain" alt="${info.sigla}" onerror="this.style.display='none'">`;
-    }
+  // 1) Tenta o cache real da ESPN primeiro
+  const escudoReal=ESCUDOS_ESPN[nNorm];
+  if(escudoReal){
+    return`<img src="${escudoReal}" style="width:${tamanho}px;height:${tamanho}px;object-fit:contain" alt="${nomeTime}" onerror="this.outerHTML=getFallbackEscudo('${nomeTime.replace(/'/g,"\\'")}',${tamanho})">`;
+  }
+  // 2) Sem cache ainda — usa fallback visual com a sigla e cor do time
+  return getFallbackEscudo(nomeTime,tamanho);
+}
+function getFallbackEscudo(nomeTime,tamanho){
+  const info=getInfoTime(nomeTime);
+  if(info){
+    return`<div style="width:${tamanho}px;height:${tamanho}px;border-radius:50%;background:${info.cor}22;border:1.5px solid ${info.cor};display:flex;align-items:center;justify-content:center;font-size:${Math.max(8,tamanho*0.28)}px;font-weight:800;color:${info.cor==='#000000'?'#fff':info.cor}">${info.sigla}</div>`;
   }
   return`<div style="width:${tamanho}px;height:${tamanho}px;display:flex;align-items:center;justify-content:center;font-size:${tamanho*0.4}px">⚽</div>`;
 }
@@ -520,6 +534,13 @@ function processarJogosESPN(events){
     const clock=ev.status?.displayClock||'';
     const isLive=st==='STATUS_IN_PROGRESS'||st==='STATUS_FIRST_HALF'||st==='STATUS_SECOND_HALF'||st==='STATUS_HALFTIME'||st==='STATUS_END_PERIOD'||st==='STATUS_OVERTIME';
     const isDone=st==='STATUS_FULL_TIME'||st==='STATUS_FINAL'||st.includes('FINAL');
+
+    // Captura o escudo real direto do JSON da ESPN (mais confiável que qualquer
+    // URL externa que possamos supor) e guarda num cache global por nome de time
+    const logo1=home?.team?.logo;
+    const logo2=away?.team?.logo;
+    if(logo1)ESCUDOS_ESPN[normalizarNomeTime(time1)]=logo1;
+    if(logo2)ESCUDOS_ESPN[normalizarNomeTime(time2)]=logo2;
 
     const dtUTC=ev.date?new Date(ev.date):null;
     const dtBrasilia=dtUTC?new Date(dtUTC.getTime()-3*3600*1000):null;
@@ -828,6 +849,13 @@ async function renderTabela(){
     const data=await res.json();
     const entries=data.children?.[0]?.standings?.entries||data.standings?.entries||[];
     if(!entries.length){c.innerHTML='<div class="empty-state"><span class="ei">📊</span><p>Tabela indisponível no momento.</p></div>';return}
+
+    // Captura os escudos de todos os 20 times de uma vez, direto da resposta da tabela
+    entries.forEach(e=>{
+      const nome=e.team?.displayName;
+      const logo=e.team?.logos?.[0]?.href||e.team?.logo;
+      if(nome&&logo)ESCUDOS_ESPN[normalizarNomeTime(nome)]=logo;
+    });
 
     const linhas=entries.map((e,i)=>{
       const time=e.team?.displayName||'?';
